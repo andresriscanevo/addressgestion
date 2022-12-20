@@ -1,0 +1,31 @@
+{
+    "address":[
+        {
+            "id":1,
+            "address_txt":"calle 54-25 ",
+            "zona_name":"norte",
+            "city_name":"bogota",
+            "region_name_l1":"dc",
+            "region_name_l2":"cundinamarca",
+            "name_country":"Colombia"
+        },
+        {
+            "id":2,
+            "address_txt":"calle 54-25 barrio el tin",
+            "zona_name":"norte",
+            "city_name":"bogota",
+            "region_name_l1":"dc",
+            "region_name_l2":"cundinamarca",
+            "name_country":"Colombia"
+        },
+        {
+            "id":3,
+            "address_txt":"calle 54-25 barrio",
+            "zona_name":"norte",
+            "city_name":"bogota",
+            "region_name_l1":"dc",
+            "region_name_l2":"cundinamarca",
+            "name_country":"Colombia"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+p {
+  font-family: 'Roboto';
+}
+
+/* Elevation boxes */
+.box {
+  min-height: 100px;
+  min-width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin: 1rem;
+  border-radius: 4px;
+}
+
+/* Grid boxes */
+.grid-box {
+  background-color: #AFC82E;
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  margin-bottom: 2rem;
+}
+.grid-box:nth-child(odd) {
+  background-color: #AFC82E;
+}

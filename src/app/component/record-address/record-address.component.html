@@ -1,0 +1,152 @@
+<!-- Desarrollo de una ventana emergente con la creacion de la direccion  -->
+
+<form [formGroup]="registeraddress" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <h2 class="center">Create the new address of the company</h2>
+    <label>Select to country</label>
+    <div *ngFor="let country of countries" class="field-radiobutton">
+      <p-radioButton
+        [inputId]="country.key"
+        name="category"
+        [value]="country"
+        [(ngModel)]="selectedCountry"
+        [ngModelOptions]="{ standalone: true }"
+        [disabled]="country.key === 'R'"
+      ></p-radioButton>
+      <label [for]="country.key">{{ country.name }}</label>
+    </div>
+    <br />
+    <label>Select Region</label>
+
+    <p-dropdown
+      [options]="listaddress"
+      optionLabel="name_country"
+      [filter]="true"
+      filterBy="name"
+      placeholder="Select to Region/Departament/Province"
+      optionLabel="name_country"
+      formControlname="regionlevel1"
+      [showClear]="true"
+    ></p-dropdown>
+    <!-- creacion de formulario  -->
+    <h5>Asignar direccion</h5>
+    <div class="grid">
+      <div class="grid-box p-col-4">
+        <!-- asignacion del tipo de via  -->
+        <label>way type </label>
+        <p-dropdown
+          [options]="waysTypeName"
+          optionLabel="name"
+          [filter]="true"
+          filterBy="name"
+          placeholder="Select value"
+          [(ngModel)]="selectedwaysTypeName"
+          [showClear]="true"
+        ></p-dropdown>
+      </div>
+      <div class="grid-box p-col-2">
+        <span class="p-float-label">
+          <input
+            type="text"
+            id="way_main"
+            pInputText
+            formControlName="way_main"
+          />
+          <label for="way_main"> Way Main</label>
+        </span>
+      </div>
+
+      <div class="grid-box p-col-2">
+        <span class="p-float-label">
+          <input
+            type="text"
+            id="way_secondary"
+            pInputText
+            formControlName="way_secondary"
+          />
+          <label for="way_main"> Way Secondary</label>
+        </span>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="grid-box p-col">
+        <span class="p-float-label">
+          <input
+            type="text"
+            id="place_type_name"
+            pInputText
+            formControlName="place_type_name"
+          />
+          <label for="place_type_name"> Place type </label>
+        </span>
+      </div>
+      <div class="grid-box p-col">
+        <span class="p-float-label">
+          <input
+            type="text"
+            id="place_name"
+            pInputText
+            formControlName="place_name"
+          />
+          <label for="place_name"> Place name </label>
+        </span>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="grid-box p-col">
+        <span class="p-float-label">
+          <input
+            type="text"
+            id="longitude"
+            pInputText
+            formControlName="longitude"
+          />
+          <label for="longitude"> Longitude </label>
+        </span>
+      </div>
+      <div class="grid-box p-col">
+        <span class="p-float-label">
+          <input
+            type="text"
+            id="latitude"
+            pInputText
+            formControlName="latitude"
+          />
+          <label for="latitude"> Latitude </label>
+        </span>
+      </div>
+      <p-button
+        (click)="showBasicDialog()"
+        icon="pi pi-external-link"
+        label="Show"
+      ></p-button>
+      <p-dialog
+        header="Header"
+        [(visible)]="displayBasic"
+        [style]="{ width: '50vw' }"
+        [baseZIndex]="10000"
+      >
+        <p>
+          To know the value of the latitude and longitude of where you are or of
+          a specific address click here
+          <p-button
+            icon="pi pi-check"
+            (click)="gotocordenates()"
+            (click)="displayBasic = false" 
+            label="obtain"
+            styleClass="p-button-text"
+          ></p-button>
+        </p>
+        <ng-template pTemplate="footer">
+          <p-button
+            icon="pi pi-check"
+            (click)="displayBasic = false" 
+            label="Exit"
+            styleClass="p-button-text"
+          ></p-button>
+        </ng-template>
+      </p-dialog>
+    </div>
+  </div>
+  <p-button type="submit" class="p-button-success"> Submit </p-button>
+</form>
