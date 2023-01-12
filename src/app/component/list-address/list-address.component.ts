@@ -32,6 +32,7 @@ export class ListAddressComponent implements OnInit {
 
     this.cols = [
       { field: 'address_id', header: 'Id' },
+      { field: 'way_type_name', header: 'Way Type' },
       { field: 'way_main', header: 'Way main' },
       { field: 'way_secondary', header: 'Way Secondary' },
       { field: 'latitude', header: 'Latitude' },

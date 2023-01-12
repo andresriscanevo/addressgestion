@@ -1,31 +1,44 @@
 <div class="container">
-  <form [formGroup]="addressform" (ngSubmit)="onSubmit()" novalidate>
-    <h2 class="center">Create the new address of the company</h2>
-    <label>Select to country</label>
-    <div *ngFor="let country of countries" class="field-radiobutton">
-      <p-radioButton
-        [inputId]="country.key"
-        name="category"
-        [value]="country"
-        [(ngModel)]="selectedCountry"
-        [ngModelOptions]="{ standalone: true }"
-        [disabled]="country.key === 'R'"
-      ></p-radioButton>
-      <label [for]="country.key">{{ country.name }}</label>
-    </div>
-    <br />
-    <label>Select Region</label>
+  <h2 class="center">Create the new address of the company</h2>
+  <label>Select to country</label>
+  <br />
+  <div *ngFor="let country of countries" class="row-radiobutton">
+    <p-radioButton
+      [inputId]="country.key"
+      name="regions"
+      [value]="country"
+      [(ngModel)]="selectedCountry"
+      [ngModelOptions]="{ standalone: true }"
+      (onClick)="updateRegions()"
+    ></p-radioButton>
+    <label [for]="country.key">{{ country.name }}</label>
+  </div>
 
-    <p-dropdown
-      [options]="listaddress"
-      optionLabel="name_country"
-      [filter]="true"
-      filterBy="name"
-      placeholder="Select to Region/Departament/Province"
-      optionLabel="name_country"
-      formControlname="regionlevel1"
-      [showClear]="true"
-    ></p-dropdown>
+  <br />
+  <br />
+  <label>Selectable Regions </label>
+
+  <p-dropdown
+    [options]="countries"
+    optionLabel="regions"
+    [filter]="true"
+    filterBy="regions"
+    placeholder="Select a Region/Departament/Providence"
+    [showClear]="true"
+  >
+    <ng-template let-country pTemplate="item">
+      <div *ngIf="country.name === selectedCountry">
+        <div *ngFor="let region of country.regions">{{ region }}</div>
+      </div>
+    </ng-template>
+  </p-dropdown>
+  <div class="grid-box p-col-4">
+    <span class="p-float-label">
+      <input type="text" id="regionle1" formControlName="regionlevel" />
+      <label for="regionle1"> Region level </label>
+    </span>
+  </div>
+  <form [formGroup]="addressform" (ngSubmit)="onSubmit()" novalidate>
     <!-- creacion de formulario  -->
     <h5>Asignar direccion</h5>
     <div formGroupName="way_type" class="grid">
@@ -40,7 +53,6 @@
           [showClear]="true"
           filterBy="way_type_name"
           placeholder="Select value"
-          (onChange)="updatewayTypeCode()"
         ></p-dropdown>
       </div>
     </div>

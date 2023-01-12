@@ -3,8 +3,11 @@
   <p-card header="address" [style]="{ width: '1000px' }">
     <ng-template pTemplate="header">
       <p-table
+        #dt
         [columns]="cols"
         [value]="gaddresss"
+        [sortOrder]="-1"
+        sortField="address_id"
         [tableStyle]="{ 'min-width': '50rem' }"
       >
         <ng-template pTemplate="header" let-columns>

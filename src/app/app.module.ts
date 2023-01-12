@@ -34,9 +34,10 @@ import { CardModule } from 'primeng/card';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GaddressService } from './services/gaddress.service';
-
+import { MenuModule } from 'primeng/menu';
 import { DetailsAddressComponent } from './component/details-address/details-address.component';
 import { UpdateAddressComponent } from './component/update-address/update-address.component';
+import { FilterAddressComponent } from './component/filter-address/filter-address.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { UpdateAddressComponent } from './component/update-address/update-addres
     MenubarComponent,
     DetailsAddressComponent,
     UpdateAddressComponent,
+    FilterAddressComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -66,6 +68,7 @@ import { UpdateAddressComponent } from './component/update-address/update-addres
     InputTextareaModule,
     InputTextModule,
     MenubarModule,
+    MenuModule,
     MultiSelectModule,
     ProgressBarModule,
     RadioButtonModule,

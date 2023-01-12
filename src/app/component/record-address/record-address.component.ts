@@ -19,28 +19,29 @@ import Swal from 'sweetalert2';
 export class RecordAddressComponent implements OnInit {
   gaddress: Gaddress = new Gaddress();
   listaddress: Gaddress[] = [];
-  selectedCountry = '';
+  selectedCountry: string;
   countries: any[];
+  regions: string[];
   value: any;
   waytypename: string;
   addressform: FormGroup;
   displayBasic: boolean;
   waysTypeName: any[] = [
-    { way_type_name: 'RURAL', way_type_code: 'rural' },
-    { way_type_name: 'Avenida Calle', way_type_code: 'avcalle' },
-    { way_type_name: 'Avenida Carrera', way_type_code: 'avcra' },
-    { way_type_name: 'Avenida', way_type_code: 'avenida' },
-    { way_type_name: 'Autopista', way_type_code: 'autopista' },
-    { way_type_name: 'Boulevard', way_type_code: 'boulevard' },
-    { way_type_name: 'Calle', way_type_code: 'calle' },
-    { way_type_name: 'Carrera', way_type_code: 'carrera' },
-    { way_type_name: 'Carretera', way_type_code: 'carretera' },
-    { way_type_name: 'Circular', way_type_code: 'circular' },
-    { way_type_name: 'Circunvalar', way_type_code: 'circunvalar' },
-    { way_type_name: 'Diagonal', way_type_code: 'diagonal' },
-    { way_type_name: 'Kilometro', way_type_code: 'kilometro' },
-    { way_type_name: 'Transversal', way_type_code: 'transversal' },
-    { way_type_name: 'Manzana', way_type_code: 'manzana' },
+    { way_type_name: 'RURAL', way_type_code: 'rural', wcode: 6 },
+    { way_type_name: 'Avenida Calle', way_type_code: 'avcalle', wcode: 4 },
+    { way_type_name: 'Avenida Carrera', way_type_code: 'avcra', wcode: 5 },
+    { way_type_name: 'Avenida', way_type_code: 'avenida', wcode: 3 },
+    { way_type_name: 'Autopista', way_type_code: 'autopista', wcode: 7 },
+    { way_type_name: 'Boulevard', way_type_code: 'boulevard', wcode: 11 },
+    { way_type_name: 'Calle', way_type_code: 'calle', wcode: 12 },
+    { way_type_name: 'Carrera', way_type_code: 'carrera', wcode: 2 },
+    { way_type_name: 'Carretera', way_type_code: 'carretera', wcode: 21 },
+    { way_type_name: 'Circular', way_type_code: 'circular', wcode: 27 },
+    { way_type_name: 'Circunvalar', way_type_code: 'circunvalar', wcode: 26 },
+    { way_type_name: 'Diagonal', way_type_code: 'diagonal', wcode: 24 },
+    { way_type_name: 'Kilometro', way_type_code: 'kilometro', wcode: 22 },
+    { way_type_name: 'Transversal', way_type_code: 'transversal', wcode: 25 },
+    { way_type_name: 'Manzana', way_type_code: 'manzana', wcode: 23 },
     ,
   ];
   buildingsTypeUseName: any[] = [
@@ -56,16 +57,41 @@ export class RecordAddressComponent implements OnInit {
     public fb: FormBuilder
   ) {
     this.countries = [
-      { name: 'COLOMBIA', key: 'COL' },
-      { name: 'ARGENTINA', key: 'ARG' },
-      { name: 'CHILE', key: 'CHL' },
-      { name: 'MEXICO', key: 'MEX' },
+      {
+        name: 'COLOMBIA',
+        code: 'COL',
+        num: 2,
+        regions: [
+          ['BARRANQUILLA'],
+          ['CUNDINAMARCA'],
+          ['BOYACA'],
+          ['ANTIOQUIA'],
+        ],
+      },
+      {
+        name: 'ARGENTINA',
+        code: 'ARG',
+        num: 1,
+        regions: ['BUENOS AIRES', 'CHACO', 'CORDOBA', 'CORRIENTES'],
+      },
+      {
+        name: 'CHILE',
+        code: 'CHL',
+        num: 3,
+        regions: ['ARICA-PARINACOTA', 'TARAPACA', 'ANTOFAGASTA', 'ATACAMA'],
+      },
+      {
+        name: 'MEXICO',
+        code: 'MEX',
+        num: '4',
+        regions: ['AGUASCALIENTES', 'BAJA CALIFORNIA', 'JALISCO', 'PUEBLA'],
+      },
     ];
     //definicion del formgroup
     this.addressform = this.fb.group({
       way_type: new FormGroup({
         active: new FormControl({ value: false, disabled: false }),
-        way_type_id: new FormControl({ value: 0, disabled: false }),
+        way_type_id: new FormControl({ value: 4, disabled: false }),
         way_type_name: new FormControl(),
         way_type_code: new FormControl(),
       }),
@@ -109,6 +135,7 @@ export class RecordAddressComponent implements OnInit {
   ngOnInit() {
     this.primengConfig.ripple = true;
     this.obtaddress();
+    this.updateRegions();
   }
 
   gotolistAddress() {
@@ -126,7 +153,15 @@ export class RecordAddressComponent implements OnInit {
       (error) => console.log(error)
     );
   }
-  updatewayTypeCode() {}
+  updateRegions() {
+    console.log(this.selectedCountry);
+    this.countries.forEach((country) => {
+      if (country.name === this.selectedCountry) {
+        this.regions = country.regions;
+        console.log(this.regions);
+      }
+    });
+  }
 
   onSubmit() {
     let formData = this.addressform.value;
@@ -135,7 +170,7 @@ export class RecordAddressComponent implements OnInit {
       formData = {
         way_type: {
           active: formData.active,
-          way_type_id: formData.way_type.way_type_id,
+          way_type_id: formData.way_type.way_type_name['wcode'],
           way_type_name: formData.way_type.way_type_name['way_type_name'],
           way_type_code: formData.way_type.way_type_name['way_type_code'],
         },
@@ -143,7 +178,8 @@ export class RecordAddressComponent implements OnInit {
           active: formData.active,
           building_type_id: formData.building_type.building_type_id,
           building_type_name: formData.building_type.building_type_name,
-          building_type_code: formData.building_type.building_type_name[5],
+          building_type_code:
+            formData.building_type.building_type_name.substring(0, 4),
           building_type_use:
             formData.building_type.building_type_use['building_type_use'],
         },
@@ -151,14 +187,17 @@ export class RecordAddressComponent implements OnInit {
           active: formData.active,
           place_type_id: formData.place_type.place_type_id,
           place_type_name: formData.place_type.place_type_name,
-          place_type_code: formData.place_type.place_type_name[3],
+          place_type_code: formData.place_type.place_type_name.substring(0, 4),
         },
         active: formData.active,
         address_id: formData.address_id,
         way_main: formData.way_main,
         way_secondary: formData.way_secondary,
         place_name: formData.place_name,
-        addr_txt: formData.addr_txt,
+        addr_txt:
+          formData.way_type.way_type_name['way_type_name'] +
+          formData.way_main +
+          formData.way_secondary,
         latitude: formData.latitude,
         longitude: formData.longitude,
       };

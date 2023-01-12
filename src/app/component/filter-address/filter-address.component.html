@@ -1,0 +1,29 @@
+<div class="container">
+  <label for="Country">Select to country:</label>
+
+  <p-dropdown
+    [options]="countries"
+    [(ngModel)]="countryselected"
+    placeholder="Select to value"
+    (onChange)="viewregions()"
+  ></p-dropdown>
+  <br />
+  <label>The regions in the country {{ countryselected }} are:</label>
+  <br />
+  <p-table [columns]="cols" [value]="regsbyc">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns">
+          {{ col.header }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns">
+          {{ rowData[col.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

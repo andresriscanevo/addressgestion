@@ -1,22 +1,29 @@
 <div class="container">
   <p-card
     header="Details address"
-    subheader="Card Subheader"
+    subheader="{{ gaddress.address_txt }}"
     [style]="{ width: '400px' }"
     styleClass="shadow-2"
   >
     <ng-template pTemplate="header">
       <img alt="Card" src="https://picsum.photos/200/200" />
+      <br />
     </ng-template>
     <label> <b>Country: </b>{{ gaddress.building }} </label>
     <br />
     <label>
       <b>The address is: </b>
-      {{ waytypename }}
-      {{ gaddress.way_secondary }}</label
-    >
+      {{ waytypename }} {{ gaddress.way_main }}
+      {{ gaddress.way_secondary }}
+    </label>
     <br />
-
+    <label>the place name: {{ gaddress.place_name }}</label>
+    <br />
+    <br />
+    <label>the latitude: {{ gaddress.latitude }}</label>
+    <br />
+    <br />
+    <label>the longitude: {{ gaddress.longitude }}</label>
     <br />
     <ng-template pTemplate="default">
       <p-button

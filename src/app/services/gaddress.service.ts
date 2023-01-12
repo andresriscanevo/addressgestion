@@ -45,7 +45,13 @@ export class GaddressService {
   }
   // actualiza la direccion por id
   updateAddress(address_idn: number, gaddress: Gaddress): Observable<Object> {
-    const path = `${this.api}}/caddress/delete/${address_idn}`;
+    const path = `${this.api}/caddress/delete/${address_idn}`;
     return this.httpClient.put(path, gaddress);
+  }
+  // obtiene la lista de regiones por pais
+  getregbycountry(country_n: string): Observable<any> {
+    const path = `${this.api}/caddress/regbycountry?country_name=${country_n}`;
+    console.log(path);
+    return this.httpClient.get<any>(path);
   }
 }
