@@ -1,6 +1,6 @@
 <div class="container">
   <form [formGroup]="addressform" (ngSubmit)="onSubmit()" novalidate>
-    <h2 class="center">Create the new address of the company</h2>
+    <h2 class="center">Update the address of {{ addr_id }}</h2>
     <label>Select to country</label>
     <div *ngFor="let country of countries" class="field-radiobutton">
       <p-radioButton
@@ -40,7 +40,6 @@
           [showClear]="true"
           filterBy="way_type_name"
           placeholder="Select value"
-          (onChange)="updatewayTypeCode()"
         ></p-dropdown>
       </div>
     </div>
@@ -144,31 +143,11 @@
         </ng-template>
       </p-dialog>
     </div>
-    <!-- formgroup para waytype -->
-    <div formGroupName="building_type" class="grid">
-      <div class="grid-box p-col-4">
-        <!-- asignacion del tipo de via  -->
-        <label>Building type use </label>
-        <p-dropdown
-          formControlName="building_type_use"
-          [options]="buildingsTypeUseName"
-          optionLabel="building_type_use"
-          [filter]="true"
-          [showClear]="true"
-          filterBy="building_type_use"
-          placeholder="Select value"
-        ></p-dropdown>
-      </div>
-      <div class="grid-box p-col">
-        <span class="p-float-label">
-          <input
-            type="text"
-            id="building_type_name"
-            formControlName="building_type_name"
-          />
-          <label for="building_type_name"> Building Name</label>
-        </span>
-      </div>
+    <div class="grid-box p-col-2">
+      <span class="p-float-label">
+        <input type="text" id="building" formControlName="building" />
+        <label for="building"> building </label>
+      </span>
     </div>
 
     <p-button type="submit" class="p-button-success"> Submit </p-button>

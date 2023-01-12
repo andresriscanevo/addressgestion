@@ -1,0 +1,31 @@
+<div class="container">
+  <p-card
+    header="Details address"
+    subheader="Card Subheader"
+    [style]="{ width: '400px' }"
+    styleClass="shadow-2"
+  >
+    <ng-template pTemplate="header">
+      <img alt="Card" src="https://picsum.photos/200/200" />
+    </ng-template>
+    <label> <b>Country: </b>{{ gaddress.building }} </label>
+    <br />
+    <label>
+      <b>The address is: </b>
+      {{ waytypename }}
+      {{ gaddress.way_secondary }}</label
+    >
+    <br />
+
+    <br />
+    <ng-template pTemplate="default">
+      <p-button
+        label="Back to list"
+        icon="pi pi-times"
+        styleClass="p-button-secondary"
+        [style]="{ 'margin-left': '.5em' }"
+        (onClick)="gotolist()"
+      ></p-button>
+    </ng-template>
+  </p-card>
+</div>
